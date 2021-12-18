@@ -1,15 +1,9 @@
 const gameBoard = (() => {
     let _board = ["", "", "", "", "", "", "", "", "",];
 
-    const _validPosition = position => position >= 0 && position < 9;
-
     const add = (symbol, position) => {
-        if (_validPosition(position) && !_board[position]) {
-            displayController.update(symbol, position);
-            return _board[position] = symbol;
-        } else {
-            return false;
-        }
+        displayController.update(symbol, position);
+        return _board[position] = symbol;
     }
     const clear = () => _board = ["", "", "", "", "", "", "", "", "",];
     const get = () => _board;
@@ -31,8 +25,10 @@ const playerFactory = (symbol) => {
 
 const engine = ((playerOne, playerTwo) => {
     const _symbols = [playerOne.getSymbol(), playerTwo.getSymbol()];
+
     let _currentTurn = playerOne;
 
+    const _validPosition = position => position >= 0 && position < 9;
     const _nextTurn = () => _currentTurn == playerOne ? _currentTurn = playerTwo : _currentTurn = playerOne;
     const _getPosition = e => e.srcElement.getAttribute("data-position");
     const _checkWin = () => {
@@ -42,8 +38,8 @@ const engine = ((playerOne, playerTwo) => {
         if ((board[0] && board[1] && board[2]) &&
             (board[3] && board[4] && board[5]) &&
             (board[6] && board[7] && board[8])) {
-                winner = "tie";
-        } 
+            winner = "tie";
+        }
 
         _symbols.forEach(symbol => {
             if ((board[0] == symbol && board[1] == symbol && board[2] == symbol) ||
@@ -61,7 +57,11 @@ const engine = ((playerOne, playerTwo) => {
 
     const playTurn = e => {
         const position = _getPosition(e);
-        if (gameBoard.add(getTurn(), position)) _nextTurn();
+        if (_validPosition(position) && !gameBoard.get()[position]) {
+            const turn = getTurn();
+            _nextTurn();
+            gameBoard.add(turn, position);
+        }
         const checkWin = _checkWin();
         switch (checkWin) {
             case false:
@@ -89,14 +89,10 @@ const engine = ((playerOne, playerTwo) => {
 
 const displayController = (() => {
     const _segments = document.querySelectorAll(".board-segment");
+    const _statusMessage = document.querySelector("#status-message");
     const _restartContainer = document.querySelector("#restart-container");
     const _restartButton = document.createElement("BUTTON");
 
-    const _buildRestartButton = (() => {
-        _restartButton.id = "restart-button";
-        _restartButton.innerText = "Restart";
-        _restartButton.addEventListener("click", engine.restart);
-    })();
     const _segmentPressed = e => engine.playTurn(e);
     const _disabledSegments = () => _segments.forEach(segment => segment.disabled = true);
     const _enableSegments = () => _segments.forEach(segment => segment.disabled = false);
@@ -104,11 +100,20 @@ const displayController = (() => {
     const _showRestart = () => {
         _restartContainer.appendChild(_restartButton);
     };
+    const _showTurn = () => {
+        _statusMessage.innerText = `${engine.getTurn()}'s turn to play`;
+    }
+    const _showWinner = (winner) => {
+        _statusMessage.innerText = `${winner} wins!`;
+    }
 
-    const update = (symbol, position) => document.querySelector(`[data-position="${position}"]`).innerText = symbol;
+    const update = (symbol, position) => {
+        document.querySelector(`[data-position="${position}"]`).innerText = symbol;
+        _showTurn();
+    };
     const clear = () => {
         for (let i = 0; i < 9; i++) {
-            update("", i);         
+            update("", i);
         }
         _hideRestartButton();
         _enableSegments();
@@ -117,12 +122,21 @@ const displayController = (() => {
         _disabledSegments();
         _showRestart();
     }
-    const win = () => {
+    const win = (winner) => {
         _disabledSegments();
+        _showWinner(winner);
         _showRestart();
     }
 
-    _segments.forEach(segment => segment.addEventListener("click", _segmentPressed));
+    const _init = (() => {
+        _restartButton.id = "restart-button";
+        _restartButton.innerText = "Restart";
+        _restartButton.addEventListener("click", engine.restart);
+        
+        _segments.forEach(segment => segment.addEventListener("click", _segmentPressed));
+
+        _showTurn();
+    })();
 
     return {
         update,
