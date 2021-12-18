@@ -22,6 +22,8 @@ body {
     border: 0.2rem solid black;
     background: white;
     transition: 0.3s;
+    font-size: 4rem;
+    font-weight: bolder;
 }
 
 .board-segment:hover {
