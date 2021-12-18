@@ -10,7 +10,6 @@
 </head>
 <body>
     <div id="header">Knots and Crosses</div>
-    <div id="status-message"></div>
     <div id="player-setup" class="game-setup">
         <div id="player-one" class="player-card">
             <div class="player-header">Player One</div>
@@ -42,17 +41,33 @@
     <div id="start-container" class="game-setup">
         <button id="start-button">Start</button>
     </div>
-    <div id="game-board">
-        <button class="board-segment" data-position="0"></button>
-        <button class="board-segment" data-position="1"></button>
-        <button class="board-segment" data-position="2"></button>
-        <button class="board-segment" data-position="3"></button>
-        <button class="board-segment" data-position="4"></button>
-        <button class="board-segment" data-position="5"></button>
-        <button class="board-segment" data-position="6"></button>
-        <button class="board-segment" data-position="7"></button>
-        <button class="board-segment" data-position="8"></button>
+    <div id="game-items">
+        <div id="score-board">
+            <h2 id="score-header">Score</h2>
+            <div id="score-body">
+                <div class="score-card">
+                    <h3 class="score-name" id="score-player-one-name">Elliot</h3>
+                    <p class="score-value" id="score-player-one-value">0</p>
+                </div>
+                <div class="score-card">
+                    <h3 class="score-name"id="score-player-two-name">Lucy</h3>
+                    <p class="score-value"id="score-player-two-value">0</p>
+                </div>
+            </div>
+        </div>
+        <div id="status-message"></div>
+        <div id="game-board">
+            <button class="board-segment" data-position="0"></button>
+            <button class="board-segment" data-position="1"></button>
+            <button class="board-segment" data-position="2"></button>
+            <button class="board-segment" data-position="3"></button>
+            <button class="board-segment" data-position="4"></button>
+            <button class="board-segment" data-position="5"></button>
+            <button class="board-segment" data-position="6"></button>
+            <button class="board-segment" data-position="7"></button>
+            <button class="board-segment" data-position="8"></button>
+        </div>
+        <div id="restart-container"></div>
     </div>
-    <div id="restart-container"></div>
 </body>
 </html>

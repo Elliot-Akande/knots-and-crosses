@@ -108,15 +108,19 @@ const engine = ((playerOne, playerTwo) => {
 const displayController = (() => {
     const _segments = document.querySelectorAll(".board-segment");
     const _gameSetup = document.querySelectorAll(".game-setup");
+    const _scoreBoard = document.querySelector("#score-board");
     const _gameBoard = document.querySelector("#game-board");
     const _startButton = document.querySelector("#start-button");
     const _statusMessage = document.querySelector("#status-message");
+    const _playerOneName = document.querySelector("#score-player-one-name");
+    const _playerTwoName = document.querySelector("#score-player-two-name");
     const _restartContainer = document.querySelector("#restart-container");
     const _restartButton = document.createElement("BUTTON");
 
     const _start = () => {
         if (_getPlayers()) {
             _hideGameSetup();
+            _showScore();
             _showGameBoard();
             _showTurn();
 
@@ -128,14 +132,18 @@ const displayController = (() => {
         }
     };
     const _getPlayers = () => {
-        const _playerOneName = document.querySelector("#player-one-name").value;
+        let _playerOneName = document.querySelector("#player-one-name").value;
         const _playerOneSymbol = document.querySelector("#player-one-symbol").value;
-        const _playerTwoName = document.querySelector("#player-two-name").value;
+        let _playerTwoName = document.querySelector("#player-two-name").value;
         const _playerTwoSymbol = document.querySelector("#player-two-symbol").value;
+
+        if (_playerOneName.length > 10) _playerOneName = _playerOneName.substr(0,10);
+        if (_playerTwoName.length > 9) _playerTwoName = _playerTwoName.substr(0,10);
+
+        _setScoreNames(_playerOneName, _playerTwoName);
 
         engine.setPlayerOne(_playerOneName, _playerOneSymbol);
         engine.setPlayerTwo(_playerTwoName, _playerTwoSymbol);
-        console.log(_playerOneName && _playerOneSymbol && _playerOneName && _playerOneSymbol)
         return (_playerOneName && _playerOneSymbol && _playerOneName && _playerOneSymbol);
     };
     const _hideGameSetup = () => _gameSetup.forEach(div => div.setAttribute("style", "display: none"));
@@ -147,8 +155,23 @@ const displayController = (() => {
     const _showRestart = () => {
         _restartContainer.appendChild(_restartButton);
     };
+    const _setScoreNames = (playerOne, playerTwo) => {
+        _playerOneName.innerText = playerOne;
+        _playerTwoName.innerText = playerTwo;
+    }
+    const _showScore = () => {
+        _scoreBoard.setAttribute("style", "display: flex");
+    }
+    const _updateScore = (winner) => {
+        if (winner == _playerOneName.innerText){
+            +(document.querySelector("#score-player-one-value").innerText)++;
+        } else {
+            +(document.querySelector("#score-player-two-value").innerText)++;
+        }
+    }
     const _showTurn = () => {
         _statusMessage.innerText = `${engine.getTurn()}'s turn to play`;
+        _statusMessage.setAttribute("style", "display: block");
     };
     const _showWinner = (winner) => {
         _statusMessage.innerText = `${winner} wins!`;
@@ -171,6 +194,7 @@ const displayController = (() => {
     };
     const win = (winner) => {
         _disabledSegments();
+        _updateScore(winner);
         _showWinner(winner);
         _showRestart();
     };

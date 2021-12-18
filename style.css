@@ -1,10 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body,
+p,
+h2,
+h3,
+div,
+button,
+label,
+input {
+    font-family: serif;  
+}
+
 body {
     margin: 0;
 }
 
 #header {
     font-size: 1.9rem;
-    padding: 1rem 2rem;
+    padding: 1.3rem 2rem;
     color: white;
     background: black;
 }
@@ -59,15 +72,69 @@ body {
     padding: 0.5rem;
     width: 19.3rem;
     border-radius: 0.5rem;
-    border: 0.2rem solid black;
     background: black;
     color: white;
     font-weight: bold;
     font-size: 1rem;
 }
 
+#game-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#score-board {
+    display: none;
+    flex-direction: column;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 0.2rem solid black;
+    width:19.3rem;
+    margin: 2rem 0 1rem;
+    text-align: center;
+}
+
+#score-header {
+    text-align: center;
+    color: white;
+    background: black;
+    margin: 0;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+#score-body {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.score-name {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+}
+
+.score-value {
+    font-size: 3rem;
+    margin: 0;
+}
+
+#status-message {
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background: black;
+    max-width:17.6rem;
+    word-wrap: break-word;
+    display: none;
+}
+
 #game-board {
-    margin-top: 6rem;
+    margin-top: 2rem;
     display: none;
     grid-template-columns: 7rem 7rem 7rem; 
     grid-template-rows: 7rem 7rem 7rem;
@@ -91,6 +158,16 @@ body {
 }
 .board-segment:disabled:hover {
     background: white;
+}
+
+#restart-button {
+    color: white;
+    background: black;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.5rem 4rem;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 [data-position="0"],
