@@ -11,6 +11,37 @@
 <body>
     <div id="header">Knots and Crosses</div>
     <div id="status-message"></div>
+    <div id="player-setup" class="game-setup">
+        <div id="player-one" class="player-card">
+            <div class="player-header">Player One</div>
+            <div class="player-details">
+                <div class="player-labels">
+                    <label for="player-one-name">Name: </label>
+                    <label for="player-one-symbol">Marker: </label>
+                </div>
+                <div class="player-input">
+                    <input type="text" id="player-one-name" placeholder="Enter name..">
+                    <input type="text" id="player-one-symbol" value="X">
+                </div>
+            </div>
+        </div>
+        <div id="player-two" class="player-card">
+            <div class="player-header">Player Two</div>
+            <div class="player-details">
+                <div class="player-labels">
+                    <label for="player-two-name">Name: </label>
+                    <label for="player-two-symbol">Marker: </label>
+                </div>
+                <div class="player-input">
+                    <input type="text" id="player-two-name" placeholder="Enter name..">
+                    <input type="text" id="player-two-symbol" value="O">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="start-container" class="game-setup">
+        <button id="start-button">Start</button>
+    </div>
     <div id="game-board">
         <button class="board-segment" data-position="0"></button>
         <button class="board-segment" data-position="1"></button>

@@ -3,19 +3,77 @@ body {
 }
 
 #header {
-    font-size: 2rem;
+    font-size: 1.9rem;
     padding: 1rem 2rem;
     color: white;
     background: black;
 }
 
+#player-setup {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.player-card {
+    margin: 0.7rem 1.25rem;
+    border: 0.2rem solid black;
+    border-radius: 0.5rem;
+}
+
+.player-header {
+    padding: 0.5rem;
+    color: white;
+    background: black;
+    font-weight: bold;
+}
+
+.player-details {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.8rem;
+}
+
+.player-labels {
+    padding-top: 0.05rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.player-input {
+    flex-basis: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#start-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+#start-button {
+    padding: 0.5rem;
+    width: 19.3rem;
+    border-radius: 0.5rem;
+    border: 0.2rem solid black;
+    background: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 #game-board {
     margin-top: 6rem;
-    display: grid;
+    display: none;
     grid-template-columns: 7rem 7rem 7rem; 
     grid-template-rows: 7rem 7rem 7rem;
     justify-content: center;
 }
+
 
 .board-segment,
 .board-segment:disabled {
