@@ -173,8 +173,11 @@ const displayController = (() => {
         _statusMessage.innerText = `${engine.getTurn()}'s turn to play`;
         _statusMessage.setAttribute("style", "display: block");
     };
-    const _showWinner = (winner) => {
+    const _showWinner = winner => {
         _statusMessage.innerText = `${winner} wins!`;
+    };
+    const _showTie = () => {
+        _statusMessage.innerText = "Tie game!";
     };
 
     const update = (symbol, position) => {
@@ -190,6 +193,7 @@ const displayController = (() => {
     };
     const tie = () => {
         _disabledSegments();
+        _showTie();
         _showRestart();
     };
     const win = (winner) => {
