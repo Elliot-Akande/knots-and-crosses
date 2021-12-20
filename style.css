@@ -154,12 +154,16 @@ body {
     color: black;
 }
 
-.board-segment:active {
-    background: #c0c0c0;
+.board-segment:hover {
+    background: rgb(240, 240, 240);
 }
 
-.board-segment:active:disabled {
-    background: none;
+.board-segment:active {
+    background: rgb(197, 197, 197);
+}
+
+.board-segment:disabled:hover {
+    background: white;
 }
 
 #restart-button {
