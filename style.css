@@ -157,6 +157,11 @@ body {
 .board-segment:hover {
     background: rgb(230, 230, 230);
 }
+
+.board-segment:active {
+    background: rgb(0, 0, 0);
+}
+
 .board-segment:disabled:hover {
     background: white;
 }
